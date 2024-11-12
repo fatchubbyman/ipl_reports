@@ -23,17 +23,13 @@ urls = ['https://www.espncricinfo.com/series/indian-premier-league-2007-08-31349
 game_links = []
 
 for url in urls :
-    c=0
     opener = requests.get(url)
     soup = bs(opener.content,'lxml')
     all_matches = soup.find('div', class_ = 'ds-grow ds-px-0')
-    #match = all_matches.find_all('div', class_ = 'ds-p-4 hover:ds-bg-ui-fill-translucent ds-border-none ds-border-t ds-border-line')
-    for i in all_matches.children:
-        game_links.append(i)
-        c+=1
-    print(c)
-
-                 
-
+    match = all_matches.find_all('div', class_ = 'ds-p-4 hover:ds-bg-ui-fill-translucent ds-border-t ds-border-line')
+    for link in match:
+        a_tag = link.find('a')
+        href = a_tag.get('href')
+        game_links.append(f'https://www.espncricinfo.com' + href)
 
 print(len(game_links))

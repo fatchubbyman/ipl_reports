@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup as bs
 import requests
-# open the league link and find all the match report URLs and store them in a text file and find some way to open all of them together
 
 urls = ['https://www.espncricinfo.com/series/indian-premier-league-2007-08-313494/match-schedule-fixtures-and-results',
         'https://www.espncricinfo.com/series/indian-premier-league-2009-374163/match-schedule-fixtures-and-results',
@@ -32,4 +31,6 @@ for url in urls :
         href = a_tag.get('href')
         game_links.append(f'https://www.espncricinfo.com' + href)
 
-print(len(game_links))
+with open("output.txt", "w") as file:
+    for item in game_links:
+        file.write(item + "\n")
